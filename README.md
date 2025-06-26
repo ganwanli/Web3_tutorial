@@ -1,196 +1,8 @@
-# 北大肖臻老师的区块链课程
-
-# 比特币
-
-比特币中主要用到了密码学中两个功能：1.哈希 2.签名。密码学中的哈希函数（cryptographtic hash function） 
-
-一、哈希函数 哈希函数主要有三个特性：1、碰撞特性（collision resistance）；2、隐秘性（Hiding）；3、谜题友好（puzzle friendly）。 
-
-1、collision resistance collision resistance 即为输入两个输入值X，Y，经过哈希函数之后得到H(X)=H(Y)，即为哈希碰撞。利用哈希碰撞，可以检测对信息的篡改。假设输入x1，哈希值为H(x1)，此时很难找到一个x2，使得H(x1)=H(x2)。 
-
-2、Hiding hiding 意思是哈希函数的计算过程是单向的，不可逆的。但前提要满足输入控件足够大，且分布均匀。通常我们在实际操作中会使用添加随机数的方法。假设给定一个输入值X，可以算出哈希值H(x)，但是不能从H(x)推出X。
-
- 3、puzzle friendly 通常我们限定输出的哈希值在一定范围内，即H(block header + nonce) < target （block header是区块链的链头），这个确定链头范围的过程即为挖矿。
-
- 二、签名 签名就相当于每个人的开户行账号。公钥签名，即开户账号，验证签名用私钥，即为账号密码。以此来确保比特币的安全传输。
-
-# 以太坊
-
-## modified Merkle-Paricia-Trie 
-
-![image-20250618232142594](/Users/mac/Library/Application Support/typora-user-images/image-20250618232142594.png)
-
-
-
-![image-20250618232823109](/Users/mac/Library/Application Support/typora-user-images/image-20250618232823109.png)
-
-
-
-## 头结点的数据结构
-
-![image-20250618233417423](/Users/mac/Library/Application Support/typora-user-images/image-20250618233417423.png)
-
-parenthash：父节点
-
-UncleHash：叔叔结点
-
-Coinbase：旷工的地址
-
-Root：状态树
-
-TxHash：交易树
-
-ReceiptHash：收据树
-
-Bloom：提供高效的查询符合某种交易的查询结果
-
-Difficulty：挖矿难度
-
-Number：第几个
-
-GasLimit：这个区块最大能交易的汽油费
-
-GasUsed：这个区块总共用的汽油费
-
-Time:挖矿的时间
-
-Extra：
-
-MixDigest：挖矿相关
-
-Nonce：挖矿相关
-
-
-
-## 区块的结构
-
-![image-20250618234146791](/Users/mac/Library/Application Support/typora-user-images/image-20250618234146791.png)
-
-header：指向block header的指针
-
-uncles：指向叔父区块的header的指针数组
-
-transactions：区块中的交易列表
-
-![image-20250618234419669](/Users/mac/Library/Application Support/typora-user-images/image-20250618234419669.png)
-
-## 新建块的代码
-
-![image-20250619001953928](/Users/mac/Library/Application Support/typora-user-images/image-20250619001953928.png)
-
-## Derivesha函数代码
-
-![image-20250619002024432](/Users/mac/Library/Application Support/typora-user-images/image-20250619002024432.png)
-
-
-
-## trie的代码：
-
-![image-20250619002127167](/Users/mac/Library/Application Support/typora-user-images/image-20250619002127167.png)
-
-## receipt的代码：
-
-![image-20250619002157447](/Users/mac/Library/Application Support/typora-user-images/image-20250619002157447.png)
-
-## CreateBloom、LogsBloom、bloom9
-
-![image-20250619002300365](/Users/mac/Library/Application Support/typora-user-images/image-20250619002300365.png)
-
-## BloomLookup
-
-![image-20250619002828943](/Users/mac/Library/Application Support/typora-user-images/image-20250619002828943.png)
-
-
-
-## 以太坊挖矿算法
-
-### 1.生成16MB的cache
-
-![image-20250619012817549](/Users/mac/Library/Application Support/typora-user-images/image-20250619012817549.png)
-
-### 2.用cache生成1GB的DATASET
-
-![image-20250619012952602](/Users/mac/Library/Application Support/typora-user-images/image-20250619012952602.png)
-
-![image-20250619013056849](/Users/mac/Library/Application Support/typora-user-images/image-20250619013056849.png)
-
-### 3.旷工挖矿函数，轻节点验证函数
-
-![image-20250619013147752](/Users/mac/Library/Application Support/typora-user-images/image-20250619013147752.png)
-
-### 挖矿主循环
-
-![image-20250619013938321](/Users/mac/Library/Application Support/typora-user-images/image-20250619013938321.png)
-
-## 区块难度公式
-
-![image-20250619102216231](/Users/mac/Library/Application Support/typora-user-images/image-20250619102216231.png)
-
-### 解释其中部分
-
-![image-20250619102412908](/Users/mac/Library/Application Support/typora-user-images/image-20250619102412908.png)
-
-### 难度炸弹
-
-![image-20250619102940076](/Users/mac/Library/Application Support/typora-user-images/image-20250619102940076.png)
-
-## 智能合约
-
-![image-20250619132152094](/Users/mac/Library/Application Support/typora-user-images/image-20250619132152094.png)
-
-HighestBidIncreased:拍卖的最高价增加
-
-Pay2Beneficiary：
-
-![image-20250619133221696](/Users/mac/Library/Application Support/typora-user-images/image-20250619133221696.png)
-
-
-
-![image-20250619133647498](/Users/mac/Library/Application Support/typora-user-images/image-20250619133647498.png)
-
-![image-20250619133722862](/Users/mac/Library/Application Support/typora-user-images/image-20250619133722862.png)
-
-### 智能合约的创建
-
-![image-20250619155938455](/Users/mac/Library/Application Support/typora-user-images/image-20250619155938455.png)
-
-汽油费（gas）
-
-![image-20250619160125507](/Users/mac/Library/Application Support/typora-user-images/image-20250619160125507.png)
-
-Accountnonce：交易序号
-
-Price：汽油费的单价
-
-GasLimit：愿意支付汽油费最大值
-
-Recipient：转账地址
-
-Amount：转账数量
-
-Payload：data域，存放调用的哪个函数，函数的参数取值
-
-## 拍卖
-
-![image-20250619164151457](/Users/mac/Library/Application Support/typora-user-images/image-20250619164151457.png)
-
-![image-20250619164443912](/Users/mac/Library/Application Support/typora-user-images/image-20250619164443912.png)
-
-![image-20250619170252946](/Users/mac/Library/Application Support/typora-user-images/image-20250619170252946.png)
-
-
-
-
-
-
-
-# chainlink预言机课程
+# Chainlink预言机的B站课程
 
 ## 1.区块链基础知识
 
-![image-20250620203750181](/Users/mac/Library/Application Support/typora-user-images/image-20250620203750181.png)
-
-
+![Screenshot 2025-06-26 at 10.12.52](/Users/mac/Documents/个人/学习/WEB3/Web3_tutorial/screenshot/Screenshot 2025-06-26 at 10.12.52.png)
 
 
 
@@ -254,9 +66,7 @@ contract HelloWord{
 }
 ```
 
-
-
-![image-20250620215458488](/Users/mac/Library/Application Support/typora-user-images/image-20250620215458488.png)
+![image-20250626102415605](/Users/mac/Documents/个人/学习/WEB3/Web3_tutorial/screenshot/image-20250626102415605.png)
 
 
 
@@ -632,31 +442,45 @@ contract FundTokenERC20 is ERC20 {
 
 1）复制FundTokenERC20.sol的合约地址，在Etherscan中搜索，在contract选项卡中显示的代码是乱码，在这里点击“varify and publish”
 
-![image-20250624162036324](/Users/mac/Library/Application Support/typora-user-images/image-20250624162036324.png)
+![image-20250624162036324](/Users/mac/Documents/个人/学习/WEB3/Web3_tutorial/screenshot/image-20250624162036324.png)
+
+
 
 2）选择对应编译器类型、编译器版本和开源证件的版本，再继续
 
-![image-20250624162115425](/Users/mac/Library/Application Support/typora-user-images/image-20250624162115425.png)
+![image-20250624162115425](/Users/mac/Documents/个人/学习/WEB3/Web3_tutorial/screenshot/image-20250624162115425.png)
 
 
 
 3）将需要部署上去的代码扁平化，需要注意的是，要把多个SPDX-License-Identifier：MIT注释删掉多余的，只能保留一个。
 
-![image-20250624162342178](/Users/mac/Library/Application Support/typora-user-images/image-20250624162342178.png)
+![image-20250624162342178](/Users/mac/Documents/个人/学习/WEB3/Web3_tutorial/screenshot/image-20250624162342178.png)
+
+
 
 4）再将生成的_flattened的源码粘贴到代码框中
 
-![image-20250624162627057](/Users/mac/Library/Application Support/typora-user-images/image-20250624162627057.png)
+
+
+
+
+
+
+![image-20250624162627057](/Users/mac/Documents/个人/学习/WEB3/Web3_tutorial/screenshot/image-20250624162627057-0904875.png)
 
 
 
 5）其他不用改点击下面的“Verify and Publish”
 
-![image-20250624162705882](/Users/mac/Library/Application Support/typora-user-images/image-20250624162705882.png)
+![image-20250624162705882](/Users/mac/Documents/个人/学习/WEB3/Web3_tutorial/screenshot/image-20250624162705882.png)
 
 
 
-## 4.创建一个hardhat项目
+## 4.hardhat项目
+
+### ①创建hardhat项目
+
+shell命令
 
 ```cmd
 --进入项目文件夹
@@ -689,7 +513,7 @@ git init
 
 将remix中的FundMe粘贴过来，发现使用的外部的包报错
 
-![image-20250622220026172](/Users/mac/Library/Application Support/typora-user-images/image-20250622220026172.png)
+![image-20250622220026172](/Users/mac/Documents/个人/学习/WEB3/Web3_tutorial/screenshot/image-20250622220026172.png)
 
 ```cmd
   --将remix中的FundMe粘贴过来，发现使用的外部的包报错，安装对应的包
@@ -698,7 +522,7 @@ git init
 
 同时，package.json的dependencies也会多出一条chainlink的包
 
-![image-20250622220248661](/Users/mac/Library/Application Support/typora-user-images/image-20250622220248661.png)
+![image-20250622220248661](/Users/mac/Documents/个人/学习/WEB3/Web3_tutorial/screenshot/image-20250622220248661.png)
 
 安装完成后，编译整个项目
 
@@ -708,22 +532,20 @@ git init
   
 ```
 
-![image-20250622220458870](/Users/mac/Library/Application Support/typora-user-images/image-20250622220458870.png)
+![image-20250622220458870](/Users/mac/Documents/个人/学习/WEB3/Web3_tutorial/screenshot/image-20250622220458870.png)
 
 
 
-### 部署
+### ②创建部署脚本
 
-创建部署脚本
-
-创建scripts文件夹，再创建deployFundMe.js的部署脚本文件
+创建scripts文件夹，再创建**deployFundMe.js**的部署脚本文件
 
 ```javascript
 // import ethers.js
 // create main function
 // execute main function
 
-//引入这个包
+//引入这个ethers.js包  docs.ethers.org
 const { ethers } = require("hardhat") 
 
 //需要在函数前加上async关键字，因为要使用到await，await的作用是等待一个异步操作完成，然后获取结果。
@@ -745,6 +567,10 @@ main().then().catch((error) => {
 })
 ```
 
+
+
+### ③配置网络
+
 在hardhat.config.js中需要添加networks
 
 ```javascript
@@ -757,17 +583,269 @@ networks: {
   }
 ```
 
+
+
 其中url是从Alchemy里获得的（alchemy.com），需要先注册账号，创建新的app
 
-![image-20250622231303022](/Users/mac/Library/Application Support/typora-user-images/image-20250622231303022.png)
+![image-20250622231303022](/Users/mac/Documents/个人/学习/WEB3/Web3_tutorial/screenshot/image-20250622231303022.png)
 
 根据提示填写app名称
 
-![image-20250622231325687](/Users/mac/Library/Application Support/typora-user-images/image-20250622231325687.png)
+![image-20250622231325687](/Users/mac/Documents/个人/学习/WEB3/Web3_tutorial/screenshot/image-20250622231325687.png)
 
 创建好app后，在网络那里可以找到https请求的地址，将地址复制粘贴到hardhat.config.js中的url中
 
-![image-20250622231443230](/Users/mac/Library/Application Support/typora-user-images/image-20250622231443230.png)
+![image-20250622231443230](/Users/mac/Documents/个人/学习/WEB3/Web3_tutorial/screenshot/image-20250622231443230.png)
 
 再将metamask中的私钥粘贴到hardhat.config.js中的accounts中
+
+命令部署
+
+```shell
+npx hardhat run scripts/deployFundMe.js --network sepolia
+```
+
+如果部署成功可以看到以下输出
+
+```
+mac@MacBook-Pro-3 Web3_tutorial % npx hardhat run scripts/deployFundMe.js --network sepolia
+contract deploying
+contract has been deployed successfully, contract address is 0xBf1C7f050E07018b102f6EF81282969D0602951c
+```
+
+为了防止敏感信息的泄露，在根目录创建一个文件.env在里面配置信息
+
+```
+SEPOLIA_URL = https://eth-sepolia.g.alchemy.com/v2/dQM5ysm44BnbnDu4WhuKc
+SEPOLIA_PRIVATE_KEY = eb06fbc9c0856151a2bebd151cf6760878f7e2c856724a232a867dfd09379442
+```
+
+要在中引用.env的信息，需要安装dotenv工具
+
+```
+npm install --save-dev dotenv
+```
+
+安装加密的env工具包
+
+```
+npm install --save-dev @chainlink/env-enc
+```
+
+设置加密变量
+
+```
+--先设置env-enc的密码
+mac@MacBook-Pro-3 Web3_tutorial % npx env-enc set-pw
+Enter the password (input will be hidden):
+***********
+
+--输入设置加密变量，然后根据提示先输入变量名再输入变量值
+mac@MacBook-Pro-3 Web3_tutorial % npx env-enc set
+```
+
+完成后会新增一个.env.enc的文件
+
+在hardhat.config.js文件中添加以下代码替换明文的敏感信息
+
+```javascript
+require("@chainlink/env-enc").config();
+const SEPOLIA_URL = process.env.SEPOLIA_URL
+const PRIVATE_KEY = process.env.SEPOLIA_PRIVATE_KEY
+
+//在把明文显示的地方改为变量
+url: SEPOLIA_URL,
+      accounts: [PRIVATE_KEY]
+```
+
+
+
+### ④Verify验证
+
+在hardhat官网上的插件可以找到如何安装并应用Verify插件
+
+1）安装hardhat的Verify插件
+
+```cmd
+npm install --save-dev @nomicfoundation/hardhat-verify
+```
+
+2添加代码到hardhat.config.js
+
+```javascript
+require("@nomicfoundation/hardhat-verify");
+```
+
+3）用命令行执行验证
+
+```cmd
+npx hardhat verify --network mainnet DEPLOYED_CONTRACT_ADDRESS "Constructor argument 1"
+-- mainnet 网络名称
+-- DEPLOYED_CONTRACT_ADDRESS  合约的地址
+-- "Constructor argument 1" 参数
+```
+
+4）用脚本执行验证
+
+a.在Etherscan上申请apikey(需要先登录)
+
+![image-20250625094919521](/Users/mac/Documents/个人/学习/WEB3/Web3_tutorial/screenshot/image-20250625094919521.png)
+
+b.env-enc设置ETHERSCAN_API_KEY
+
+c.增加hardhat.config.js代码
+
+```javascript
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
+
+
+module.exports = {
+  solidity: "0.8.24",
+  networks: {
+    sepolia: {
+      url: SEPOLIA_RPC_URL,
+      accounts: [PRIVATE_KEY],
+      chainId: 11155111
+    }
+  },
+  etherscan: {
+    apiKey: {
+      sepolia: ETHERSCAN_API_KEY
+    }
+  }
+};
+```
+
+d.增加deployFundMe.js脚本
+
+```javascript
+//添加到main函数的打印合约被成功部署的下面
+
+// verify fundme
+//检查chainId是否是sepolia（11155111）和是否有ETHERSCAN_API_KET
+    if(hre.network.config.chainId == 11155111 && process.env.ETHERSCAN_API_KEY) {
+        console.log("Waiting for 5 confirmations")
+      //部署之后需要等待5个确认后再开始执行验证操作
+        await fundMe.deploymentTransaction().wait(5) 
+      //执行验证
+        await verifyFundMe(fundMe.target, [300])
+    } else {
+      //如果不是sepolia，就跳过验证
+        console.log("verification skipped..")
+    }
+
+//执行验证
+async function verifyFundMe(fundMeAddr, args) {
+  //在命令行中执行verify
+    await hre.run("verify:verify", {
+        address: fundMeAddr,
+        constructorArguments: args,
+      });
+}
+```
+
+
+
+### ⑤合约交互脚本
+
+在deployFundMe.js中添加如下代码
+
+```javascript
+//init 2 accounts
+    const [firstAccount,secondAccount] = await ethers.getSigners()
+    console.log(`2 accounts are ${firstAccount.address} and ${secondAccount.address}`)
+
+    // fund contract with first account
+    const fundTx = await fundMe.fund({value : ethers.parseEther("0.01")})
+    await fundTx.wait()
+
+    //check balance of contract
+    const balanceOfContractAfterFirstFund = await ethers.provider.getBalance(fundMe.target)
+    console.log(`Balance of the contract is ${balanceOfContractAfterFirstFund}`)
+
+    //fund contract with second account
+    const fundTxWithSecondAccount = await fundMe.connect(secondAccount).fund({value : ethers.parseEther("0.01")})
+    await fundTxWithSecondAccount.wait()
+
+    //check balance of contract
+    const balanceOfContractAfterSecondFund = await ethers.provider.getBalance(fundMe.target)
+    console.log(`Balance of the contract is ${balanceOfContractAfterSecondFund}`)
+```
+
+### ⑥自定义task
+
+a.新增tasks目录，在其下新增三个js文件
+
+deploy-fundme.js
+
+```javascript
+const { task } = require("hardhat/config")
+
+//task("task名称","task描述").setAction(async(taskArgs：命令行传入的参数,hre：Hardhat Runtime Environment（运行时环境）))
+task("deploy-fundme", "deploy and verify fundme conract").setAction(async(taskArgs, hre) => {
+     // 以下是和deployFundMe.js一样的具体合约部署部分的代码
+} )
+
+//这里需要提出来
+async function verifyFundMe(fundMeAddr, args) {
+    await hre.run("verify:verify", {
+        address: fundMeAddr,
+        constructorArguments: args,
+      });
+}
+
+
+module.exports = {}
+```
+
+Interact-fundme.js
+
+```javascript
+const { task } = require("hardhat/config")
+
+task("interact-fundme", "interact with fundme contract")
+		//	增加合约地址的入参
+    .addParam("addr", "fundme contract address")
+    .setAction(async(taskArgs, hre) => {
+  			//初始化合约工厂
+        const fundMeFactory = await ethers.getContractFactory("FundMe")
+        //这里用attach
+        const fundMe = fundMeFactory.attach(taskArgs.addr)
+
+        // 以下是和deployFundMe.js一样的具体合约交互代码
+})
+
+module.exports = {}
+```
+
+Index.js
+
+```javascript
+exports.deployConract = require("./deploy-fundme")
+exports.interactContract = require("./interact-fundme")
+```
+
+b.在hardhat.config.js中添加如下代码
+
+```javascript
+require("./tasks")
+```
+
+c.这时在命令行中输入npx hardhat help就可以看到新增的task了
+
+![image-20250625221219916](/Users/mac/Documents/个人/学习/WEB3/Web3_tutorial/screenshot/image-20250625221219916.png)
+
+d.在命令行中就可以对项目分任务执行了
+
+```cmd
+mac@MacBook-Pro-3 Web3_tutorial % npx hardhat deploy-fundme --network sepolia
+```
+
+```cmd
+mac@MacBook-Pro-3 Web3_tutorial % npx hardhat interact-fundme --addr 0x219755235129d42c8D7498e0D6086781111B2b65 --network sepolia
+```
+
+
+
+## 5.Hardhat 开发框架 ： 合约测试
 

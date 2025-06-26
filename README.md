@@ -2,9 +2,7 @@
 
 ## 1.区块链基础知识
 
-![image-20250624162923146](/Users/mac/Library/Application Support/typora-user-images/image-20250624162923146.png)
-
-
+![image-20250626104902035](README.assets/image-20250626104902035.png)
 
 
 
@@ -68,9 +66,7 @@ contract HelloWord{
 }
 ```
 
-
-
-![image-20250620215458488](data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1186 638"></svg>)
+![image-20250626104917757](README.assets/image-20250626104917757.png)
 
 
 
@@ -446,27 +442,31 @@ contract FundTokenERC20 is ERC20 {
 
 1）复制FundTokenERC20.sol的合约地址，在Etherscan中搜索，在contract选项卡中显示的代码是乱码，在这里点击“varify and publish”
 
-![image-20250624162036324](/Users/mac/Library/Application Support/typora-user-images/image-20250624162036324.png)
+![image-20250626104946708](README.assets/image-20250626104946708.png)
+
+
 
 2）选择对应编译器类型、编译器版本和开源证件的版本，再继续
 
-![image-20250624162115425](/Users/mac/Library/Application Support/typora-user-images/image-20250624162115425.png)
+![image-20250626105000726](README.assets/image-20250626105000726.png)
 
 
 
 3）将需要部署上去的代码扁平化，需要注意的是，要把多个SPDX-License-Identifier：MIT注释删掉多余的，只能保留一个。
 
-![image-20250624162342178](/Users/mac/Library/Application Support/typora-user-images/image-20250624162342178.png)
+<img src="README.assets/image-20250626105020184.png" alt="image-20250626105020184" style="zoom:30%;" />
+
+
 
 4）再将生成的_flattened的源码粘贴到代码框中
 
-![image-20250624162627057](/Users/mac/Library/Application Support/typora-user-images/image-20250624162627057.png)
+![image-20250626105047678](README.assets/image-20250626105047678.png)
 
 
 
 5）其他不用改点击下面的“Verify and Publish”
 
-![image-20250624162705882](/Users/mac/Library/Application Support/typora-user-images/image-20250624162705882.png)
+<img src="README.assets/image-20250626105136749.png" alt="image-20250626105136749" style="zoom:33%;" />
 
 
 
@@ -507,7 +507,7 @@ git init
 
 将remix中的FundMe粘贴过来，发现使用的外部的包报错
 
-![image-20250622220026172](/Users/mac/Library/Application Support/typora-user-images/image-20250622220026172.png)
+![image-20250626105229068](README.assets/image-20250626105229068.png)
 
 ```cmd
   --将remix中的FundMe粘贴过来，发现使用的外部的包报错，安装对应的包
@@ -516,7 +516,7 @@ git init
 
 同时，package.json的dependencies也会多出一条chainlink的包
 
-![image-20250622220248661](/Users/mac/Library/Application Support/typora-user-images/image-20250622220248661.png)
+![image-20250626105236115](README.assets/image-20250626105236115.png)
 
 安装完成后，编译整个项目
 
@@ -526,7 +526,7 @@ git init
   
 ```
 
-![image-20250622220458870](/Users/mac/Library/Application Support/typora-user-images/image-20250622220458870.png)
+![image-20250626105252952](README.assets/image-20250626105252952.png)
 
 
 
@@ -581,15 +581,15 @@ networks: {
 
 其中url是从Alchemy里获得的（alchemy.com），需要先注册账号，创建新的app
 
-![image-20250622231303022](/Users/mac/Library/Application Support/typora-user-images/image-20250622231303022.png)
+![image-20250626105307202](README.assets/image-20250626105307202.png)
 
 根据提示填写app名称
 
-![image-20250622231325687](/Users/mac/Library/Application Support/typora-user-images/image-20250622231325687.png)
+![image-20250626105316154](README.assets/image-20250626105316154.png)
 
 创建好app后，在网络那里可以找到https请求的地址，将地址复制粘贴到hardhat.config.js中的url中
 
-![image-20250622231443230](/Users/mac/Library/Application Support/typora-user-images/image-20250622231443230.png)
+![image-20250626105324972](README.assets/image-20250626105324972.png)
 
 再将metamask中的私钥粘贴到hardhat.config.js中的accounts中
 
@@ -683,7 +683,7 @@ npx hardhat verify --network mainnet DEPLOYED_CONTRACT_ADDRESS "Constructor argu
 
 a.在Etherscan上申请apikey(需要先登录)
 
-![image-20250625094919521](/Users/mac/Library/Application Support/typora-user-images/image-20250625094919521.png)
+![image-20250626105350373](README.assets/image-20250626105350373.png)
 
 b.env-enc设置ETHERSCAN_API_KEY
 
@@ -827,7 +827,7 @@ require("./tasks")
 
 c.这时在命令行中输入npx hardhat help就可以看到新增的task了
 
-![image-20250625221219916](/Users/mac/Library/Application Support/typora-user-images/image-20250625221219916.png)
+![image-20250626105405847](README.assets/image-20250626105405847.png)
 
 d.在命令行中就可以对项目分任务执行了
 
@@ -838,4 +838,8 @@ mac@MacBook-Pro-3 Web3_tutorial % npx hardhat deploy-fundme --network sepolia
 ```cmd
 mac@MacBook-Pro-3 Web3_tutorial % npx hardhat interact-fundme --addr 0x219755235129d42c8D7498e0D6086781111B2b65 --network sepolia
 ```
+
+
+
+## 5.Hardhat 开发框架 ： 合约测试
 
